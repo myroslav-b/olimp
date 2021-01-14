@@ -3,8 +3,8 @@ package institutions
 import "testing"
 
 func TestCheckContainsName(t *testing.T) {
-	bundle := tInstitutionBandle{
-		"", "Ново-Нар'ямпільська школа І-ІІІ ступенів №13", "", "", "", "", "", "",
+	bundle := TInstitutionBundle{
+		"", "Ново-Нар'ямпільська школа І-ІІІ ступенів №13", "", "", "", "", "", "", "",
 	}
 
 	cases := []struct {
@@ -23,7 +23,7 @@ func TestCheckContainsName(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		got := bundle.checkContainsName(c.have)
+		got := bundle.checkMatchPartName(c.have)
 		if got != c.want {
 			t.Errorf("checkContainsName(%s) == %t, want %t", c.have, got, c.want)
 		}

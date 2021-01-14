@@ -15,3 +15,9 @@ func InstitutionTypeByCode(code string) (string, bool) {
 	t, ok := instType[code]
 	return t, ok
 }
+
+//IsInstitutionType returns true if the value exists, otherwise - false
+func IsInstitutionType(code string) bool {
+	_, ok := instType[code]
+	return ok
+}

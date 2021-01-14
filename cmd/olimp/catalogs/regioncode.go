@@ -37,3 +37,9 @@ func RegionNameByCode(code string) (string, bool) {
 	n, ok := regCode[code]
 	return n, ok
 }
+
+//IsRegionCode returns true if the value exists, otherwise - false
+func IsRegionCode(code string) bool {
+	_, ok := regCode[code]
+	return ok
+}
