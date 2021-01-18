@@ -4,27 +4,45 @@ import "testing"
 
 func TestCheckContainsName(t *testing.T) {
 	bundle := TInstitutionBundle{
-		"", "Ново-Нар'ямпільська школа І-ІІІ ступенів №13", "", "", "", "", "", "", "",
+		"id": "", "name": "Ново-Нар'ямпільська школа І-ІІІ ступенів №13", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": "",
 	}
 
+	type tHave struct {
+		field string
+		st    string
+	}
+
+	type tWant struct {
+		ok  bool
+		err error
+	}
+
+	type tGot struct {
+		ok  bool
+		err error
+	}
+
+	var got tGot
+
 	cases := []struct {
-		have string
-		want bool
+		have tHave
+		want tWant
 	}{
-		{"Ново-Нар'ямпільська школа І-ІІІ ступенів №13", true},
-		{"ямпільська", true},
-		{"'", true},
-		{" ", true},
-		{"", true},
-		{"Ново-Нар'ямпільська школа І-ІІІ ступенів №13 ", false},
-		{"ново-Нар'ямпільська школа І-ІІІ ступенів №13", false},
-		{"Ямпільська", false},
-		{"  ", false},
+		{tHave{"name", "Ново-Нар'ямпільська школа І-ІІІ ступенів №13"}, tWant{true, nil}},
+		{tHave{"name", "ямпільська"}, tWant{true, nil}},
+		{tHave{"name", "'"}, tWant{true, nil}},
+		{tHave{"name", " "}, tWant{true, nil}},
+		{tHave{"name", ""}, tWant{true, nil}},
+		{tHave{"name", "Ново-Нар'ямпільська школа І-ІІІ ступенів №13 "}, tWant{false, nil}},
+		{tHave{"name", "ново-Нар'ямпільська школа І-ІІІ ступенів №13"}, tWant{false, nil}},
+		{tHave{"name", "Ямпільська"}, tWant{false, nil}},
+		{tHave{"name", "  "}, tWant{false, nil}},
+		{tHave{"inst", "Ново-Нар'ямпільська школа І-ІІІ ступенів №13"}, tWant{false, ErrBadField}},
 	}
 
 	for _, c := range cases {
-		got := bundle.checkMatchPartName(c.have)
-		if got != c.want {
+		got.ok, got.err = bundle.checkMatchPartField(c.have.field, c.have.st)
+		if (got.ok != c.want.ok) || (got.err != c.want.err) {
 			t.Errorf("checkContainsName(%s) == %t, want %t", c.have, got, c.want)
 		}
 
