@@ -3,7 +3,7 @@ package institutions
 import "testing"
 
 func TestCheckContainsName(t *testing.T) {
-	bundle := TInstitutionBundle{
+	bundle := tInstitutionBundle{
 		"id": "", "name": "Ново-Нар'ямпільська школа І-ІІІ ступенів №13", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": "",
 	}
 

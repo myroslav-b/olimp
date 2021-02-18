@@ -1,8 +1,10 @@
+//Package catalogs contains basic entities and functions for working with them
 package catalogs
 
-type tInstType map[string]string
+//TInstType describes type of the institution
+type TInstType map[string]string
 
-var instType = tInstType{
+var instType = TInstType{
 	"1": "Заклад вищої освіти",
 	"2": "Заклад професійної (професійно-технічної) освіти",
 	"3": "Заклад загальної середньої освіти",
@@ -20,4 +22,9 @@ func InstitutionTypeByCode(code string) (string, bool) {
 func IsInstitutionType(code string) bool {
 	_, ok := instType[code]
 	return ok
+}
+
+//MapInstType return the map institution type
+func MapInstType() TInstType {
+	return instType
 }

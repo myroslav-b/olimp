@@ -1,3 +1,4 @@
+//Package catalogs contains basic entities and functions for working with them
 package catalogs
 
 import (
@@ -5,9 +6,11 @@ import (
 	"strings"
 )
 
-type tTypeRequest map[string]string
+//TTypeRequest describes request type
+type TTypeRequest map[string]string
 
-var typeRequest = tTypeRequest{
+var typeRequest = TTypeRequest{
+	"":            "nothing",
 	"equal":       "equal",
 	"notequal":    "not equal",
 	"contains":    "contains",
@@ -16,8 +19,16 @@ var typeRequest = tTypeRequest{
 	"notempty":    "not empty",
 }
 
+//ErrTypeRequest - error "Request type does not exist"
 var ErrTypeRequest = errors.New("Request type does not exist")
+
+//ErrNumberParam - error "Wrong number of parameters"
 var ErrNumberParam = errors.New("Wrong number of parameters")
+
+//MapTypeRequest return the map type request
+func MapTypeRequest() TTypeRequest {
+	return typeRequest
+}
 
 //TypeRequestByCode return type of institution by code
 func TypeRequestByCode(code string) (string, bool) {
@@ -40,6 +51,11 @@ func CheckByTypeRequest(st ...string) (bool, error) {
 		return false, ErrTypeRequest
 	}
 	switch st[1] {
+	case "":
+		if len(st) != 2 && (len(st) != 3) {
+			return false, ErrNumberParam
+		}
+		return true, nil
 	case "equal":
 		if len(st) != 3 {
 			return false, ErrNumberParam
@@ -69,14 +85,14 @@ func CheckByTypeRequest(st ...string) (bool, error) {
 			return true, nil
 		}
 	case "empty":
-		if len(st) != 2 {
+		if len(st) != 2 && (len(st) != 3) {
 			return false, ErrNumberParam
 		}
 		if st[0] == "" {
 			return true, nil
 		}
 	case "notempty":
-		if len(st) != 2 {
+		if len(st) != 2 && (len(st) != 3) {
 			return false, ErrNumberParam
 		}
 		if st[0] != "" {

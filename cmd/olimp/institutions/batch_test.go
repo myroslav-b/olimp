@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-type tFakeEdebo map[tCodeBatch]tInstitutionBundles
+type tFakeEdebo map[tCodeBatch]TInstitutionBundles
 
 func setCode(instType, regCode string) (tCodeBatch, error) {
 	var code tCodeBatch
@@ -21,8 +21,8 @@ func setCode(instType, regCode string) (tCodeBatch, error) {
 	return code, nil
 }
 
-func (fakeEdebo tFakeEdebo) LoadBatch(instType, regCode string) (tInstitutionBundles, error) {
-	var instBundles tInstitutionBundles
+func (fakeEdebo tFakeEdebo) LoadBatch(instType, regCode string) (TInstitutionBundles, error) {
+	var instBundles TInstitutionBundles
 	code, err := setCode(instType, regCode)
 	if err != nil {
 		return instBundles, err
@@ -59,7 +59,7 @@ func TestInitInstitutionBatch(t *testing.T) {
 	}
 
 	type tWant struct {
-		institutionBundles tInstitutionBundles
+		institutionBundles TInstitutionBundles
 		err                error
 	}
 
@@ -71,7 +71,7 @@ func TestInitInstitutionBatch(t *testing.T) {
 		{
 			tHave{"1", "05"},
 			tWant{
-				tInstitutionBundles{
+				TInstitutionBundles{
 					{"id": "1609", "name": "Відокремлений підрозділ 'Вінницький факультет Київського національного університету культури і мистецтв'", "region": "Вінницька область", "address": "Вінниця, вул. Стрілецька, 7", "phone": "(044) 529 98 31, (043) 227 23 55", "email": "", "website": "", "boss": "Кравчук Галина Олександрівна", "status": ""},
 					{"id": "1464", "name": "Вінницька філія Вищого навчального закладу \"Київський університет ринкових відносин\"", "region": "Вінницька область", "address": "Вінниця, вул. Козицького, 15", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 					{"id": "1527", "name": "Барська філія Глухівського національного педагогічного університету імені Олександра Довженка", "region": "Вінницька область", "address": "Бар, майдан Михайла Грушевського, 1", "phone": "(043) 412-32-70", "email": "barfiliynpu@ukr.net", "website": "http://new.gnpu.edu.ua", "boss": "Поберецька Вікторія Василівна", "status": ""},
@@ -82,7 +82,7 @@ func TestInitInstitutionBatch(t *testing.T) {
 		{
 			tHave{"3", "73"},
 			tWant{
-				tInstitutionBundles{
+				TInstitutionBundles{
 					{"id": "135693", "name": "комунальна обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів з поглибленим вивченням окремих предметів \"Багатопрофільний ліцей для обдарованих дітей\"", "region": "Чернівецька область", "address": "Чернівці, Чернівецька область, вул. Винниченка, буд.119", "phone": "(0372)522142", "email": "oblinter119@ukr.net", "website": "", "boss": "Семанюк Марина Костянтинівна", "status": ""},
 					{"id": "143955", "name": "Годилівський навчально-виховний комплекс Великокучурівської сільської ради Сторожинецького району Чернівецької області", "region": "Чернівецька область", "address": "с. Годилів, Сторожинецький район, Чернівецька область, вул. Центральна, буд.64", "phone": "(0373)569245", "email": "goduliv@ukr.net", "website": "http://goduliv.at.ua", "boss": "Директор Настасійчук Людмила Дмитрівна", "status": ""},
 				},
@@ -92,14 +92,14 @@ func TestInitInstitutionBatch(t *testing.T) {
 		{
 			tHave{"2", "01"},
 			tWant{
-				tInstitutionBundles{},
+				TInstitutionBundles{},
 				nil,
 			},
 		},
 		{
 			tHave{"5", "05"},
 			tWant{
-				//tInstitutionBundles{},
+				//TInstitutionBundles{},
 				nil,
 				ErrKeyBatch,
 			},
@@ -107,7 +107,7 @@ func TestInitInstitutionBatch(t *testing.T) {
 		{
 			tHave{"6", "05"},
 			tWant{
-				//tInstitutionBundles{},
+				//TInstitutionBundles{},
 				nil,
 				ErrInstType,
 			},
@@ -115,7 +115,7 @@ func TestInitInstitutionBatch(t *testing.T) {
 		{
 			tHave{"2", "99"},
 			tWant{
-				//tInstitutionBundles{},
+				//TInstitutionBundles{},
 				nil,
 				ErrRegCode,
 			},

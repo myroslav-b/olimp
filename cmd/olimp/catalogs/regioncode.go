@@ -1,8 +1,10 @@
+//Package catalogs contains basic entities and functions for working with them
 package catalogs
 
-type tRegCode map[string]string
+//TRegCode describes region codes
+type TRegCode map[string]string
 
-var regCode = tRegCode{
+var regCode = TRegCode{
 	"01": "Автономна Республіка Крим",
 	"05": "Вінницька область",
 	"07": "Волинська область",
@@ -42,4 +44,9 @@ func RegionNameByCode(code string) (string, bool) {
 func IsRegionCode(code string) bool {
 	_, ok := regCode[code]
 	return ok
+}
+
+//MapRegCode return the map region code
+func MapRegCode() TRegCode {
+	return regCode
 }

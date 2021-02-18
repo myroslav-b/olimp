@@ -1,3 +1,4 @@
+//Package institutions contains  logic of request for a list of institutions
 package institutions
 
 import (
@@ -5,10 +6,10 @@ import (
 	"strings"
 )
 
-type TInstitutionBundle map[string]string
+type tInstitutionBundle map[string]string
 
-func (bundle TInstitutionBundle) checkMatchField(field, st string) (bool, error) {
-	if _, ok := catalogs.FieldInst[field]; !ok {
+func (bundle tInstitutionBundle) checkMatchField(field, st string) (bool, error) {
+	if _, ok := catalogs.FieldInstByCode(field); !ok {
 		return false, ErrBadField
 	}
 	value, ok := bundle[field]
@@ -19,8 +20,8 @@ func (bundle TInstitutionBundle) checkMatchField(field, st string) (bool, error)
 	return b, nil
 }
 
-func (bundle TInstitutionBundle) checkMatchPartField(field, st string) (bool, error) {
-	if _, ok := catalogs.FieldInst[field]; !ok {
+func (bundle tInstitutionBundle) checkMatchPartField(field, st string) (bool, error) {
+	if _, ok := catalogs.FieldInstByCode(field); !ok {
 		return false, ErrBadField
 	}
 	value, ok := bundle[field]
@@ -31,8 +32,8 @@ func (bundle TInstitutionBundle) checkMatchPartField(field, st string) (bool, er
 	return b, nil
 }
 
-func (bundle TInstitutionBundle) checkEmptyField(field string) (bool, error) {
-	if _, ok := catalogs.FieldInst[field]; !ok {
+func (bundle tInstitutionBundle) checkEmptyField(field string) (bool, error) {
+	if _, ok := catalogs.FieldInstByCode(field); !ok {
 		return false, ErrBadField
 	}
 	value, ok := bundle[field]
