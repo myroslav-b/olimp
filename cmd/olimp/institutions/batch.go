@@ -11,17 +11,19 @@ type tCodeBatch struct {
 	regCode  string
 }
 
-//TInstitutionBundles describes the bundle of institutions
-type TInstitutionBundles []tInstitutionBundle
+//tInstitutionBundles describes the bundle of institutions
+type tInstitutionBundles []map[string]string
+
+//type tInstitutionBundles []tInstitutionBundle
 
 type tInstitutionBatch struct {
 	timestamp time.Time
 	code      tCodeBatch
-	bundles   TInstitutionBundles
+	bundles   tInstitutionBundles
 }
 
 type iBatchLoader interface {
-	LoadBatch(instType, regCode string) (TInstitutionBundles, error)
+	LoadBatch(instType, regCode string) ([]map[string]string, error)
 }
 
 func (batch *tInstitutionBatch) setTimestamp() {
@@ -74,6 +76,6 @@ func (batch *tInstitutionBatch) init(instType, regCode string, b iBatchLoader) e
 	if err != nil {
 		return err
 	}
-	batch.bundles = bundles
+	batch.bundles = tInstitutionBundles(bundles)
 	return nil
 }

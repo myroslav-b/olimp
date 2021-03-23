@@ -7,14 +7,16 @@ import (
 )
 
 type tWant struct {
-	bundles TInstitutionBundles
+	bundles tInstitutionBundles
 	err     error
 }
 
-type tFakeEdebo2 map[tCodeBatch]TInstitutionBundles
+type tFakeEdebo2 map[tCodeBatch]([]map[string]string)
 
-func (fakeEdebo tFakeEdebo2) LoadBatch(instType, regCode string) (TInstitutionBundles, error) {
-	var instBundles TInstitutionBundles
+//type tFakeEdebo2 map[tCodeBatch]tInstitutionBundles
+
+func (fakeEdebo tFakeEdebo2) LoadBatch(instType, regCode string) ([]map[string]string, error) {
+	var instBundles tInstitutionBundles
 	code, err := setCode(instType, regCode)
 	if err != nil {
 		return instBundles, err
@@ -134,7 +136,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "", "name": "", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "135693", "name": "комунальна обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів з поглибленим вивченням окремих предметів \"Багатопрофільний ліцей для обдарованих дітей\"", "region": "Чернівецька область", "address": "Чернівці, Чернівецька область, вул. Винниченка, буд.119", "phone": "(0372)522142", "email": "oblinter119@ukr.net", "website": "", "boss": "Семанюк Марина Костянтинівна", "status": ""},
 					{"id": "143955", "name": "Годилівський навчально-виховний комплекс Великокучурівської сільської ради Сторожинецького району Чернівецької області", "region": "Чернівецька область", "address": "с. Годилів, Сторожинецький район, Чернівецька область, вул. Центральна, буд.64", "phone": "(0373)569245", "email": "goduliv@ukr.net", "website": "http://goduliv.at.ua", "boss": "Директор Настасійчук Людмила Дмитрівна", "status": ""},
 				},
@@ -148,7 +150,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{},
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "135693", "name": "комунальна обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів з поглибленим вивченням окремих предметів \"Багатопрофільний ліцей для обдарованих дітей\"", "region": "Чернівецька область", "address": "Чернівці, Чернівецька область, вул. Винниченка, буд.119", "phone": "(0372)522142", "email": "oblinter119@ukr.net", "website": "", "boss": "Семанюк Марина Костянтинівна", "status": ""},
 					{"id": "143955", "name": "Годилівський навчально-виховний комплекс Великокучурівської сільської ради Сторожинецького району Чернівецької області", "region": "Чернівецька область", "address": "с. Годилів, Сторожинецький район, Чернівецька область, вул. Центральна, буд.64", "phone": "(0373)569245", "email": "goduliv@ukr.net", "website": "http://goduliv.at.ua", "boss": "Директор Настасійчук Людмила Дмитрівна", "status": ""},
 				},
@@ -162,7 +164,7 @@ func TestQuery(t *testing.T) {
 				nil,
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "135693", "name": "комунальна обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів з поглибленим вивченням окремих предметів \"Багатопрофільний ліцей для обдарованих дітей\"", "region": "Чернівецька область", "address": "Чернівці, Чернівецька область, вул. Винниченка, буд.119", "phone": "(0372)522142", "email": "oblinter119@ukr.net", "website": "", "boss": "Семанюк Марина Костянтинівна", "status": ""},
 					{"id": "143955", "name": "Годилівський навчально-виховний комплекс Великокучурівської сільської ради Сторожинецького району Чернівецької області", "region": "Чернівецька область", "address": "с. Годилів, Сторожинецький район, Чернівецька область, вул. Центральна, буд.64", "phone": "(0373)569245", "email": "goduliv@ukr.net", "website": "http://goduliv.at.ua", "boss": "Директор Настасійчук Людмила Дмитрівна", "status": ""},
 				},
@@ -176,7 +178,7 @@ func TestQuery(t *testing.T) {
 				nil,
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "135693", "name": "комунальна обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів з поглибленим вивченням окремих предметів \"Багатопрофільний ліцей для обдарованих дітей\"", "region": "Чернівецька область", "address": "Чернівці, Чернівецька область, вул. Винниченка, буд.119", "phone": "(0372)522142", "email": "oblinter119@ukr.net", "website": "", "boss": "Семанюк Марина Костянтинівна", "status": ""},
 					{"id": "143955", "name": "Годилівський навчально-виховний комплекс Великокучурівської сільської ради Сторожинецького району Чернівецької області", "region": "Чернівецька область", "address": "с. Годилів, Сторожинецький район, Чернівецька область, вул. Центральна, буд.64", "phone": "(0373)569245", "email": "goduliv@ukr.net", "website": "http://goduliv.at.ua", "boss": "Директор Настасійчук Людмила Дмитрівна", "status": ""},
 				},
@@ -190,7 +192,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "", "name": "", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "135693", "name": "комунальна обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів з поглибленим вивченням окремих предметів \"Багатопрофільний ліцей для обдарованих дітей\"", "region": "Чернівецька область", "address": "Чернівці, Чернівецька область, вул. Винниченка, буд.119", "phone": "(0372)522142", "email": "oblinter119@ukr.net", "website": "", "boss": "Семанюк Марина Костянтинівна", "status": ""},
 					{"id": "143955", "name": "Годилівський навчально-виховний комплекс Великокучурівської сільської ради Сторожинецького району Чернівецької області", "region": "Чернівецька область", "address": "с. Годилів, Сторожинецький район, Чернівецька область, вул. Центральна, буд.64", "phone": "(0373)569245", "email": "goduliv@ukr.net", "website": "http://goduliv.at.ua", "boss": "Директор Настасійчук Людмила Дмитрівна", "status": ""},
 				},
@@ -204,7 +206,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "", "name": "notempty", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "135693", "name": "комунальна обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів з поглибленим вивченням окремих предметів \"Багатопрофільний ліцей для обдарованих дітей\"", "region": "Чернівецька область", "address": "Чернівці, Чернівецька область, вул. Винниченка, буд.119", "phone": "(0372)522142", "email": "oblinter119@ukr.net", "website": "", "boss": "Семанюк Марина Костянтинівна", "status": ""},
 					{"id": "143955", "name": "Годилівський навчально-виховний комплекс Великокучурівської сільської ради Сторожинецького району Чернівецької області", "region": "Чернівецька область", "address": "с. Годилів, Сторожинецький район, Чернівецька область, вул. Центральна, буд.64", "phone": "(0373)569245", "email": "goduliv@ukr.net", "website": "http://goduliv.at.ua", "boss": "Директор Настасійчук Людмила Дмитрівна", "status": ""},
 				},
@@ -218,7 +220,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "equal", "name": "", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "135693", "name": "комунальна обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів з поглибленим вивченням окремих предметів \"Багатопрофільний ліцей для обдарованих дітей\"", "region": "Чернівецька область", "address": "Чернівці, Чернівецька область, вул. Винниченка, буд.119", "phone": "(0372)522142", "email": "oblinter119@ukr.net", "website": "", "boss": "Семанюк Марина Костянтинівна", "status": ""},
 				},
 				nil,
@@ -231,7 +233,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "equal", "name": "", "region": ""},
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "135693", "name": "комунальна обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів з поглибленим вивченням окремих предметів \"Багатопрофільний ліцей для обдарованих дітей\"", "region": "Чернівецька область", "address": "Чернівці, Чернівецька область, вул. Винниченка, буд.119", "phone": "(0372)522142", "email": "oblinter119@ukr.net", "website": "", "boss": "Семанюк Марина Костянтинівна", "status": ""},
 				},
 				nil,
@@ -244,7 +246,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "equal", "name": "", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "135693", "name": "комунальна обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів з поглибленим вивченням окремих предметів \"Багатопрофільний ліцей для обдарованих дітей\"", "region": "Чернівецька область", "address": "Чернівці, Чернівецька область, вул. Винниченка, буд.119", "phone": "(0372)522142", "email": "oblinter119@ukr.net", "website": "", "boss": "Семанюк Марина Костянтинівна", "status": ""},
 				},
 				nil,
@@ -257,7 +259,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "equal"},
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "135693", "name": "комунальна обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів з поглибленим вивченням окремих предметів \"Багатопрофільний ліцей для обдарованих дітей\"", "region": "Чернівецька область", "address": "Чернівці, Чернівецька область, вул. Винниченка, буд.119", "phone": "(0372)522142", "email": "oblinter119@ukr.net", "website": "", "boss": "Семанюк Марина Костянтинівна", "status": ""},
 				},
 				nil,
@@ -270,7 +272,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "equal", "name": "", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 			},
 			tWant{
-				TInstitutionBundles{},
+				tInstitutionBundles{},
 				nil,
 			},
 		},
@@ -281,7 +283,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "notequal", "name": "contains", "region": "notempty", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "1609", "name": "Відокремлений підрозділ 'Вінницький факультет Київського національного університету культури і мистецтв'", "region": "Вінницька область", "address": "Вінниця, вул. Стрілецька, 7", "phone": "(044) 529 98 31, (043) 227 23 55", "email": "", "website": "", "boss": "Кравчук Галина Олександрівна", "status": ""},
 					{"id": "1464", "name": "Вінницька філія Вищого навчального закладу \"Київський університет ринкових відносин\"", "region": "Вінницька область", "address": "Вінниця, вул. Козицького, 15", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 					{"id": "1527", "name": "Барська філія Глухівського національного педагогічного університету імені Олександра Довженка", "region": "Вінницька область", "address": "Бар, майдан Михайла Грушевського, 1", "phone": "(043) 412-32-70", "email": "barfiliynpu@ukr.net", "website": "http://new.gnpu.edu.ua", "boss": "Поберецька Вікторія Василівна", "status": ""},
@@ -296,7 +298,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "notequal", "name": "contains", "region": "notempty", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": "empty"},
 			},
 			tWant{
-				TInstitutionBundles{
+				tInstitutionBundles{
 					{"id": "1609", "name": "Відокремлений підрозділ 'Вінницький факультет Київського національного університету культури і мистецтв'", "region": "Вінницька область", "address": "Вінниця, вул. Стрілецька, 7", "phone": "(044) 529 98 31, (043) 227 23 55", "email": "", "website": "", "boss": "Кравчук Галина Олександрівна", "status": ""},
 					{"id": "1464", "name": "Вінницька філія Вищого навчального закладу \"Київський університет ринкових відносин\"", "region": "Вінницька область", "address": "Вінниця, вул. Козицького, 15", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 					{"id": "1527", "name": "Барська філія Глухівського національного педагогічного університету імені Олександра Довженка", "region": "Вінницька область", "address": "Бар, майдан Михайла Грушевського, 1", "phone": "(043) 412-32-70", "email": "barfiliynpu@ukr.net", "website": "http://new.gnpu.edu.ua", "boss": "Поберецька Вікторія Василівна", "status": ""},
@@ -311,7 +313,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "", "name": "", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 			},
 			tWant{
-				TInstitutionBundles{},
+				tInstitutionBundles{},
 				nil,
 			},
 		},
@@ -322,7 +324,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "", "name": "notcontains", "region": "contains", "address": "", "phone": "empty", "email": "", "website": "", "boss": "", "status": ""},
 			},
 			tWant{
-				TInstitutionBundles{},
+				tInstitutionBundles{},
 				nil,
 			},
 		},
@@ -333,7 +335,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{"id": "equal", "name": "", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 			},
 			tWant{
-				TInstitutionBundles{},
+				tInstitutionBundles{},
 				nil,
 			},
 		},
@@ -344,7 +346,7 @@ func TestQuery(t *testing.T) {
 				tInstitutionBundle{},
 			},
 			tWant{
-				TInstitutionBundles{},
+				tInstitutionBundles{},
 				nil,
 			},
 		},
@@ -355,7 +357,7 @@ func TestQuery(t *testing.T) {
 				nil,
 			},
 			tWant{
-				TInstitutionBundles{},
+				tInstitutionBundles{},
 				nil,
 			},
 		},
@@ -363,7 +365,7 @@ func TestQuery(t *testing.T) {
 
 	for _, c := range cases {
 		type tGot struct {
-			bundles TInstitutionBundles
+			bundles tInstitutionBundles
 			err     error
 		}
 		var got tGot
@@ -376,7 +378,7 @@ func TestQuery(t *testing.T) {
 	institutionStore.setShelfLife(time.Duration(0))
 	tempCode, _ := setCode("1", "05")
 	delete(fakeEdebo, tempCode)
-	tempHaveBundles := TInstitutionBundles{
+	tempHaveBundles := tInstitutionBundles{
 		{"id": "1609", "name": "Відокремлений підрозділ 'Вінницький факультет Київського національного університету культури і мистецтв'", "region": "Вінницька область", "address": "Вінниця, вул. Стрілецька, 7", "phone": "(044) 529 98 31, (043) 227 23 55", "email": "", "website": "", "boss": "Кравчук Галина Олександрівна", "status": ""},
 		{"id": "1464", "name": "Вінницька філія Вищого навчального закладу \"Київський університет ринкових відносин\"", "region": "Вінницька область", "address": "Вінниця, вул. Козицького, 15", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 	}
@@ -385,7 +387,7 @@ func TestQuery(t *testing.T) {
 		tInstitutionBundle{"id": "", "name": "", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 		tInstitutionBundle{"id": "", "name": "", "region": "", "address": "", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 	}
-	tempWantBundles := TInstitutionBundles{
+	tempWantBundles := tInstitutionBundles{
 		{"id": "1609", "name": "Відокремлений підрозділ 'Вінницький факультет Київського національного університету культури і мистецтв'", "region": "Вінницька область", "address": "Вінниця, вул. Стрілецька, 7", "phone": "(044) 529 98 31, (043) 227 23 55", "email": "", "website": "", "boss": "Кравчук Галина Олександрівна", "status": ""},
 		{"id": "1464", "name": "Вінницька філія Вищого навчального закладу \"Київський університет ринкових відносин\"", "region": "Вінницька область", "address": "Вінниця, вул. Козицького, 15", "phone": "", "email": "", "website": "", "boss": "", "status": ""},
 	}

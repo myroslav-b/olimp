@@ -3,6 +3,7 @@ package institutions
 
 import (
 	"errors"
+	"olimp/cmd/olimp/connectors"
 	"time"
 )
 
@@ -24,12 +25,20 @@ var ErrNoField = errors.New("No field of institution")
 var institutionStore tInstitutionStore
 
 //ext init
-var batchLoader iBatchLoader = nil
+//var batchLoader iBatchLoader = nil
+var nameLoader = "edbo"
 var tempShelfLife = time.Duration(24 * 60 * 60 * 1000000000)
 
 func init() {
 	institutionStore.institutionBatches = make(tInstitutionBatches)
 	institutionStore.setShelfLife(tempShelfLife)
-	institutionStore.setBatchLoader(batchLoader)
+	switch nameLoader {
+	case "edbo":
+		//institutionStore.setBatchLoader(connectors.NewEdboLoader())
+		//var conn connectors.TEdboLoader
+		//institutionStore.batchLoader = connectors.EdboLoader
+		institutionStore.batchLoader = connectors.NewEdboLoader()
+	}
+
 	institutionStore.initTurnstile()
 }

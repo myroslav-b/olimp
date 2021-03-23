@@ -59,8 +59,8 @@ func (store *tInstitutionStore) getOutTurnstile(codeBatch tCodeBatch) {
 	<-store.turnstile[codeBatch]
 }
 
-func (store *tInstitutionStore) setBatchLoader(batchLoader iBatchLoader) {
-	store.batchLoader = batchLoader
+func (store *tInstitutionStore) setBatchLoader(bl iBatchLoader) {
+	store.batchLoader = bl
 }
 
 func (store *tInstitutionStore) setShelfLife(shelfLife time.Duration) {
@@ -68,7 +68,7 @@ func (store *tInstitutionStore) setShelfLife(shelfLife time.Duration) {
 }
 
 //Query executes a request for a list of institutions
-func Query(req TRequest) (TInstitutionBundles, error) {
+func Query(req TRequest) (tInstitutionBundles, error) {
 
 	if !catalogs.IsInstitutionType(req.instType) {
 		return nil, ErrInstType
@@ -119,7 +119,7 @@ func Query(req TRequest) (TInstitutionBundles, error) {
 		}
 	}
 
-	rezBundles := make(TInstitutionBundles, 0)
+	rezBundles := make(tInstitutionBundles, 0)
 	for _, bundle := range batch.bundles {
 		flag := true
 		for field := range bundle {
