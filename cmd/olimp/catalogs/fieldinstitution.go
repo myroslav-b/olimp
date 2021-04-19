@@ -1,10 +1,10 @@
 //Package catalogs contains basic entities and functions for working with them
 package catalogs
 
-//TFieldInst describes map fields of the institution
-type TFieldInst map[string]string
+//tFieldInst describes map fields of the institution
+type tFieldInst map[string]string
 
-var fieldInst = TFieldInst{
+var fieldInst = tFieldInst{
 	"id":       "унікальний ідентифікатор установи",
 	"name":     "назва установи",
 	"region":   "регіон (область, Київ, Севастополь, АР Крим) знаходження установи",
@@ -34,7 +34,7 @@ var edboFieldTags = TEdboFieldTags{
 }
 
 //MapFieldInst return the map field of institution
-func MapFieldInst() TFieldInst {
+func MapFieldInst() tFieldInst {
 	return fieldInst
 }
 

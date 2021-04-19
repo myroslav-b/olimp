@@ -38,6 +38,22 @@ type tInstitutionStore struct {
 	turnstile          tMapChan
 }
 
+/*func (insts tInstitutionStore) QueryInstitutions(it, rc string, vf, rf map[string]string) ([]map[string]string, error) {
+	instBundles, err := Query(struct {
+		instType, regCode    string
+		valFields, reqFields tInstitutionBundle
+	}{it, rc, vf, rf})
+	if err != nil {
+		return nil, err
+	}
+	return instBundles, nil
+}*/
+
+func CreateRequest(it, rc string, vf, rf map[string]string) TRequest {
+	cr := TRequest{it, rc, vf, rf}
+	return cr
+}
+
 func (store *tInstitutionStore) initTurnstile() {
 	var codeBatch tCodeBatch
 	store.turnstile = make(tMapChan, (len(catalogs.MapInstType())+1)*(len(catalogs.MapRegCode())+1))
