@@ -3,8 +3,6 @@ package institutions
 
 import (
 	"errors"
-	"olimp/cmd/olimp/connectors"
-	"time"
 )
 
 //ErrInstType - error "Invalid Institution Type"
@@ -24,12 +22,12 @@ var ErrNoField = errors.New("No field of institution")
 
 var institutionStore tInstitutionStore
 
-//ext init
-//var batchLoader iBatchLoader = nil
-var nameLoader = "edbo"
-var tempShelfLife = time.Duration(24 * 60 * 60 * 1000000000)
+//var nameLoader = "edbo"
+//var nameLoader = main.Opts.Source
 
-func init() {
+//var tempShelfLife = time.Duration(24 * 60 * 60 * 1000000000)
+
+/*func init() {
 	institutionStore.institutionBatches = make(tInstitutionBatches)
 	institutionStore.setShelfLife(tempShelfLife)
 	switch nameLoader {
@@ -41,4 +39,4 @@ func init() {
 	}
 
 	institutionStore.initTurnstile()
-}
+}*/

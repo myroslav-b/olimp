@@ -3,6 +3,7 @@ package institutions
 
 import (
 	"olimp/cmd/olimp/catalogs"
+	"olimp/cmd/olimp/connectors"
 	"time"
 )
 
@@ -52,6 +53,18 @@ type tInstitutionStore struct {
 func CreateRequest(it, rc string, vf, rf map[string]string) TRequest {
 	cr := TRequest{it, rc, vf, rf}
 	return cr
+}
+
+func InitStore(nameLoader string, tempShelfLife time.Duration) {
+	institutionStore.institutionBatches = make(tInstitutionBatches)
+	institutionStore.setShelfLife(tempShelfLife)
+	switch nameLoader {
+	case "edbo":
+
+		institutionStore.batchLoader = connectors.NewEdboLoader()
+	}
+
+	institutionStore.initTurnstile()
 }
 
 func (store *tInstitutionStore) initTurnstile() {

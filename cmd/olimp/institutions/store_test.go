@@ -44,8 +44,10 @@ func TestQuery(t *testing.T) {
 		{"2", "99"}: {},
 	}
 
-	institutionStore.setShelfLife(time.Duration(24 * 60 * 60 * 1000000000))
+	//institutionStore.setShelfLife(time.Duration(24 * 60 * 60 * 1000000000))
 	institutionStore.setBatchLoader(fakeEdebo)
+
+	InitStore(":8080", time.Duration(24*60*60*1000000000))
 
 	cases := []struct {
 		have TRequest
