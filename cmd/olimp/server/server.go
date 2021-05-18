@@ -46,6 +46,7 @@ func (s TServer) routes() chi.Router {
 
 	router.Route("/api/v1", func(r chi.Router) {
 		r.Get("/register/{inst}/{reg}", s.getInstList)
+		r.Get("/catalog/{name}", s.getCatalog)
 	})
 
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
@@ -105,5 +106,37 @@ func (s TServer) getInstList(w http.ResponseWriter, r *http.Request) {
 	render.Status(r, http.StatusOK)
 	//render.JSON(w, r, tJSON{"inst": inst, "reg": reg, "p": request.reqFields})
 	render.JSON(w, r, listInsts)
+	return
+}
 
+func (s TServer) getCatalog(w http.ResponseWriter, r *http.Request) {
+
+	name := chi.URLParam(r, "name")
+	if name == "" {
+		log.Print("[WARN] catalog name is empty")
+		render.Status(r, http.StatusBadRequest)
+		render.JSON(w, r, tJSON{"error": "catalog name is empty"})
+		return
+	}
+
+	switch name {
+	case "fi":
+		render.Status(r, http.StatusOK)
+		render.JSON(w, r, catalogs.MapFieldInst())
+	case "it":
+		render.Status(r, http.StatusOK)
+		render.JSON(w, r, catalogs.MapInstType())
+	case "rc":
+		render.Status(r, http.StatusOK)
+		render.JSON(w, r, catalogs.MapRegCode())
+	case "tr":
+		render.Status(r, http.StatusOK)
+		render.JSON(w, r, catalogs.MapTypeRequest())
+	default:
+		log.Print("[WARN] catalog name is wrong")
+		render.Status(r, http.StatusBadRequest)
+		render.JSON(w, r, tJSON{"error": "catalog name is wrong"})
+	}
+
+	return
 }
