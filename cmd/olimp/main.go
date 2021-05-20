@@ -1,13 +1,13 @@
 package main
 
 import (
-	"olimp/cmd/olimp/engine"
-	"olimp/cmd/olimp/institutions"
-	"olimp/cmd/olimp/server"
 	"os"
 	"time"
 
 	"github.com/jessevdk/go-flags"
+	"github.com/myroslav-b/olimp/cmd/olimp/engine"
+	"github.com/myroslav-b/olimp/cmd/olimp/institutions"
+	"github.com/myroslav-b/olimp/cmd/olimp/server"
 )
 
 var opts struct {

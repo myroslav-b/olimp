@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"olimp/cmd/olimp/catalogs"
 	"time"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/render"
+	"github.com/myroslav-b/olimp/cmd/olimp/catalogs"
 	"github.com/pkg/errors"
 )
 

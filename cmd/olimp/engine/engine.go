@@ -1,6 +1,6 @@
 package engine
 
-import "olimp/cmd/olimp/institutions"
+import "github.com/myroslav-b/olimp/cmd/olimp/institutions"
 
 type tStore struct{}
 

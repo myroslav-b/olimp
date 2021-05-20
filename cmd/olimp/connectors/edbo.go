@@ -7,8 +7,9 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"olimp/cmd/olimp/catalogs"
 	"time"
+
+	"github.com/myroslav-b/olimp/cmd/olimp/catalogs"
 )
 
 type tEdboLoader struct {

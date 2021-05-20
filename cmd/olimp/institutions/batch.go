@@ -2,8 +2,9 @@
 package institutions
 
 import (
-	"olimp/cmd/olimp/catalogs"
 	"time"
+
+	"github.com/myroslav-b/olimp/cmd/olimp/catalogs"
 )
 
 type tCodeBatch struct {

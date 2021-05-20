@@ -1,9 +1,10 @@
 package institutions
 
 import (
-	"olimp/cmd/olimp/catalogs"
 	"reflect"
 	"testing"
+
+	"github.com/myroslav-b/olimp/cmd/olimp/catalogs"
 )
 
 type tFakeEdebo map[tCodeBatch]tInstitutionBundles

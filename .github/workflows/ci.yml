@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+    branches: [ dev,master ]
+  pull_request:
+    branches: [ dev,master ]
+  workflow_dispatch:
+    branches: [ dev,master ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: src/github.com/myroslav-b/olimp
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.15
+
+    - name: Test
+      run: |
+        go get -u -t ./...
+        go test -v ./...
+      env:
+        GOPATH: "/home/runner/work/olimp/olimp"
+      working-directory: src/github.com/myroslav-b/olimp/cmd/olimp
+
+    - name: Build
+      run: |
+        go get -u ./...
+        go build -v
+      env:
+        GOPATH: "/home/runner/work/olimp/olimp"
+      working-directory: src/github.com/myroslav-b/olimp/cmd/olimp

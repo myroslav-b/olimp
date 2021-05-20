@@ -2,8 +2,9 @@
 package institutions
 
 import (
-	"olimp/cmd/olimp/catalogs"
 	"strings"
+
+	"github.com/myroslav-b/olimp/cmd/olimp/catalogs"
 )
 
 type tInstitutionBundle map[string]string

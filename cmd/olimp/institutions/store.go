@@ -2,9 +2,10 @@
 package institutions
 
 import (
-	"olimp/cmd/olimp/catalogs"
-	"olimp/cmd/olimp/connectors"
 	"time"
+
+	"github.com/myroslav-b/olimp/cmd/olimp/catalogs"
+	"github.com/myroslav-b/olimp/cmd/olimp/connectors"
 )
 
 /*
