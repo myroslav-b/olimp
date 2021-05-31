@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -59,7 +58,7 @@ func (s TServer) routes() chi.Router {
 
 func (s TServer) getInstList(w http.ResponseWriter, r *http.Request) {
 
-	fmt.Println(">>>    ", r.Context())
+	//fmt.Println(">>>    ", r.Context())
 	inst, reg := chi.URLParam(r, "inst"), chi.URLParam(r, "reg")
 
 	if inst == "" || reg == "" {
@@ -101,6 +100,7 @@ func (s TServer) getInstList(w http.ResponseWriter, r *http.Request) {
 		log.Print("[WARN] failed to get list of institutions ")
 		render.Status(r, http.StatusInternalServerError)
 		render.JSON(w, r, tJSON{"error": "Failed to get list of institutions "})
+		return
 	}
 	//p := r.URL.Query().Get("v.p")
 	render.Status(r, http.StatusOK)

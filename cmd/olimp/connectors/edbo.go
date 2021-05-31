@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 	"time"
@@ -20,7 +21,7 @@ type TEdbo struct {
 	client *http.Client
 }
 
-var schemeEdebo = "https"
+var schemeEdebo = "http"
 var hostEdbo = "registry.edbo.gov.ua"
 var pathEdbo = map[string]string{
 	"1": "api/universities",
@@ -164,17 +165,20 @@ func parse(bytes []byte, tags map[string]string) ([]map[string]string, error) {
 func (edboLoader tEdboLoader) LoadBatch(instType, regCode string) ([]map[string]string, error) {
 	edbo, err := new(clientEdbo, instType, regCode)
 	if err != nil {
+		log.Print("> ", err)
 		return nil, err
 	}
 
 	bytes, err := request(edbo)
 	if err != nil {
+		log.Print(">> ", err)
 		return nil, err
 	}
 
 	tags := catalogs.MapEdboFieldTags(instType)
 	rez, err := parse(bytes, tags)
 	if err != nil {
+		log.Print(">>> ", err)
 		return nil, err
 	}
 

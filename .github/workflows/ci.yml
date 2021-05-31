@@ -37,3 +37,10 @@ jobs:
       env:
         GOPATH: "/home/runner/work/olimp/olimp"
       working-directory: src/github.com/myroslav-b/olimp/cmd/olimp
+
+    - name: Build docker image
+      run: |
+        docker build -t docker.pkg.github.com/myroslav-b/olimp/olimp:latest ./src/github.com/myroslav-b/olimp
+        docker login https://docker.pkg.github.com --username ${{ secrets.DOCKERHUB_USER }} --password ${{ secrets.DOCKERHUB_PAT }}
+        docker push docker.pkg.github.com/myroslav-b/olimp/olimp:latest
+
