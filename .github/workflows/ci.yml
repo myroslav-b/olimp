@@ -57,8 +57,8 @@ jobs:
         docker login https://docker.pkg.github.com --username ${{ secrets.DOCKERHUB_USER }} --password ${{ secrets.DOCKERHUB_PAT }}
         docker push docker.pkg.github.com/myroslav-b/olimp/olimp:master
 
-    - name: Build and push tagged master image
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master' && github.event.ref_type == 'tag'
+    - name: Build and push tagged image
+      if: github.event_name == 'push' && github.event.ref_type == 'tag'
       run: |
         GIT_TAG="${GITHUB_REF#refs/tags/}"
         docker build -t docker.pkg.github.com/myroslav-b/olimp/olimp:${GIT_TAG} ./src/github.com/myroslav-b/olimp
