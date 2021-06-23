@@ -5,8 +5,8 @@ on:
     branches: [ dev,master ]
   pull_request:
     branches: [ dev,master ]
-  workflow_dispatch:
-    branches: [ dev,master ]
+  # workflow_dispatch:
+    # branches: [ dev,master ]
 
 jobs:
 
@@ -38,9 +38,21 @@ jobs:
         GOPATH: "/home/runner/work/olimp/olimp"
       working-directory: src/github.com/myroslav-b/olimp/cmd/olimp
 
-    - name: Build docker image
+    - name: Build pr image
+      if: github.event_name == 'pull_request'
+      run: |
+        docker build -t docker.pkg.github.com/myroslav-b/olimp/olimp:latest ./src/github.com/myroslav-b/olimp
+
+    - name: Build and push dev image
+      if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+      run: |
+        docker build -t docker.pkg.github.com/myroslav-b/olimp/olimp:dev ./src/github.com/myroslav-b/olimp
+        docker login https://docker.pkg.github.com --username ${{ secrets.DOCKERHUB_USER }} --password ${{ secrets.DOCKERHUB_PAT }}
+        docker push docker.pkg.github.com/myroslav-b/olimp/olimp:dev
+
+    - name: Build and push master image
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
         docker build -t docker.pkg.github.com/myroslav-b/olimp/olimp:latest ./src/github.com/myroslav-b/olimp
         docker login https://docker.pkg.github.com --username ${{ secrets.DOCKERHUB_USER }} --password ${{ secrets.DOCKERHUB_PAT }}
         docker push docker.pkg.github.com/myroslav-b/olimp/olimp:latest
-
