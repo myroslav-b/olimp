@@ -24,6 +24,7 @@ jobs:
         go-version: 1.15
 
     - name: Test
+      if: github.event.ref_type == '!tag'
       run: |
         go get -u -t ./...
         go test -v ./...
