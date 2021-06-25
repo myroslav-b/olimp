@@ -71,5 +71,5 @@ jobs:
         docker build -t docker.pkg.github.com/myroslav-b/olimp/olimp:${GIT_TAG} ./src/github.com/myroslav-b/olimp
         docker login https://docker.pkg.github.com --username ${{ secrets.DOCKERHUB_USER }} --password ${{ secrets.DOCKERHUB_PAT }}
         docker push docker.pkg.github.com/myroslav-b/olimp/olimp:${GIT_TAG}
-        docker tag docker.pkg.github.com/myroslav-b/olimp/olimp:${GIT_TAG} umputun/secrets:latest
+        docker tag docker.pkg.github.com/myroslav-b/olimp/olimp:${GIT_TAG} docker.pkg.github.com/myroslav-b/olimp/olimp:latest
         docker push docker.pkg.github.com/myroslav-b/olimp/olimp:latest
