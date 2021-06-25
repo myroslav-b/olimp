@@ -33,6 +33,7 @@ jobs:
       working-directory: src/github.com/myroslav-b/olimp/cmd/olimp
 
     - name: Build
+      if: github.event.ref_type == '!tag'
       run: |
         go get -u ./...
         go build -v
